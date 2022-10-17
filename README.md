@@ -48,9 +48,10 @@ Plot the performance plot
 
 ## PROGRAM
 
+
+```sh
 Developed by : SARAN E
 Registration number : 212219220045
-
 
 import os
 import pandas as pd
@@ -103,27 +104,35 @@ image_gen.flow_from_directory(test_path)
 model = models.Sequential()
 model.add(layers.Conv2D(filters=32,kernel_size=(3,3),input_shape=image_shape,activation='relu'))
 model.add(layers.MaxPooling2D(pool_size=(2,2)))
+
 model.add(layers.Conv2D(filters=64,kernel_size=(3,3),input_shape=image_shape,activation='relu'))
 model.add(layers.MaxPooling2D(pool_size=(2,2)))
+
 model.add(layers.Conv2D(filters=32,kernel_size=(3,3),activation='relu'))
 model.add(layers.MaxPooling2D(pool_size=(2,2)))
+
 model.add(layers.Flatten())
+
 model.add(layers.Dense(128))
 model.add(layers.Activation('relu'))
 model.add(layers.Dropout(0.5))
+
 model.add(layers.Dense(1))
 model.add(layers.Activation('sigmoid'))
+
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 model.summary()
 batch_size = 16
+
 help(image_gen.flow_from_directory)
 train_image_gen = image_gen.flow_from_directory(train_path,
                                                target_size=image_shape[:2],
                                                 color_mode='rgb',
                                                batch_size=batch_size,
                                                class_mode='binary')
+
 train_image_gen.batch_size
 len(train_image_gen.classes)
 train_image_gen.total_batches_seen
@@ -132,6 +141,8 @@ test_image_gen = image_gen.flow_from_directory(test_path,
                                                color_mode='rgb',
                                                batch_size=batch_size,
                                                class_mode='binary',shuffle=False)
+
+
 train_image_gen.class_indices
 results = model.fit(train_image_gen,epochs=20,
                               validation_data=test_image_gen
@@ -148,6 +159,10 @@ confusion_matrix(test_image_gen.classes,predictions)
 plt.imshow(predictions)
 print[predictions]
 
+
+
+
+```
 
 ## OUTPUT
 
